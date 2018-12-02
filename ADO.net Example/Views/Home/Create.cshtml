@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Insert</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body class="container">
+    <br />
+    <h2>Add Student</h2>
+    <br />
+    @using (Html.BeginForm("Add", "Home", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.Label("Enter Name", null, new { @class = "font-weight-bold"})            
+            @Html.TextBox("S_Name", null, new { @class = "form-control col-4", type = "text" })                      
+        </div>
+        <div class="form-group">
+            @Html.Label("Enter Age", null, new { @class = "font-weight-bold" })            
+            @Html.TextBox("S_Age", null, new { @class = "form-control col-4", type = "number" })
+        </div>
+        <div class="custom-radio">
+            <input type="radio" name="S_Gender" value="Male"> Male
+            <input type="radio" name="S_Gender" value="Female"> Female           
+        </div>      
+        <br />
+        <button type="submit" class="btn btn-outline-success">Submit</button>
+    }
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html> 

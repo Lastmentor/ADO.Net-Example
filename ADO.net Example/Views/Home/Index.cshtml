@@ -1,0 +1,59 @@
+﻿@using System.Data
+@using System.Data.SqlClient
+@model System.Data.DataTable
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Home</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body class="container">
+    <br />
+    <h2 class="text-center">Student Information</h2>
+    <br />
+    <div class="text-center">
+        @Html.ActionLink("Add Student", "Create", null, new { @class = "btn btn-success" })
+    </div>    
+    @{
+        if (Model.Rows.Count > 0)
+        {
+            <br /><br />
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (DataRow dr in Model.Rows)
+                        {
+                            <tr>
+                                <td>@dr["Student_ID"].ToString()  </td>
+                                <td>@dr["Student_Name"].ToString()  </td>
+                                <td>@dr["Student_Age"].ToString()  </td>
+                                <td>@dr["Student_Gender"].ToString()  </td>
+                                <td>@Html.ActionLink("Edit Student","Edit", new { StudentID = dr["Student_ID"].ToString() }, new { @class = "btn btn-outline-success" })</td>
+                                <td>@Html.ActionLink("Delete Student", "Delete", new { StudentID = dr["Student_ID"].ToString() }, new { @class = "btn btn-outline-danger" })</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    }
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

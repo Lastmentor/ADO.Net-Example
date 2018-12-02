@@ -1,0 +1,50 @@
+﻿@using System.Data
+@using System.Data.SqlClient
+@model System.Data.DataTable
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body class="container">
+    <br />
+    <h2>Update Student</h2>
+    <br />
+    @using (Html.BeginForm("UpdateRecord", "Home", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.Label("Enter Name", null, new { @class = "font-weight-bold" })
+            @Html.TextBox("S_Name", null, new { @class = "form-control col-4", type = "text", @Value = @Model.Rows[0]["Student_Name"] })
+        </div>
+        <div class="form-group">
+            @Html.Label("Enter Age", null, new { @class = "font-weight-bold" })
+            @Html.TextBox("S_Age", null, new { @class = "form-control col-4", type = "number", @Value = @Model.Rows[0]["Student_Age"] })
+        </div>
+        <div class="custom-radio">
+            @if (Model.Rows[0]["Student_Gender"].ToString().ToLower() == "male")
+            {
+                <input type="radio" name="S_Gender" value="Male" checked /> @Html.Raw("Male")
+                <input type="radio" name="S_Gender" value="Female" /> @Html.Raw("Female")
+            }
+            else
+            {
+                <input type="radio" name="S_Gender" value="Male"> @Html.Raw("Male")
+                <input type="radio" name="S_Gender" value="Female" checked /> @Html.Raw("Female")
+            }
+        </div>
+        <br />
+        <input type="hidden" name="S_ID" value="@Model.Rows[0]["Student_ID"]" />
+        <button type="submit" class="btn btn-outline-success">Submit</button>
+    }
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
